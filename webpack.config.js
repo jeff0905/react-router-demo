@@ -4,11 +4,14 @@ const htmlPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: 'eval-source-map',
   mode: 'development',
-  entry: [
-    'react-hot-loader/patch',
-    'webpack-hot-middleware/client',
-    path.resolve('src/index.js'),
-  ],
+  // entry: [
+  //   // 'react-hot-loader/patch',
+  //   // 'webpack-hot-middleware/client',
+  //   path.resolve('src/index.js'),
+  // ],
+  entry: {
+    'index': './src/index.js'
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),

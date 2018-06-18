@@ -10,7 +10,15 @@ const proxy = {
         res.json(detail);
     },
     'POST /api/good/add': (req, res) => {
-        
+        const name = req.body.name;
+        const desp = req.body.desp;
+        const detail = preList;
+        detail.push({
+            id: preList[preList.length - 1].id + 1,
+            name,
+            desp,
+        })
+        res.json(detail);
     },
     'POST /api/good/del/:id': () => {}
 }

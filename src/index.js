@@ -1,45 +1,33 @@
-import "babel-polyfill";
-
-import { AppContainer } from 'react-hot-loader';
+import '@babel/polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { createBrowserHistory } from 'history';
+import { createStore, applyMiddleware, combineReducers  } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
-import { routerMiddleware, connectRouter } from 'connected-react-router';
+import goodModel from './model/goods';
+import { reducer as formReducer } from 'redux-form'
 
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { render } from 'react-dom';
+import {createBrowserHistory} from 'history';
 import App from './app';
-import rootReducer from './reducers';
-import { applyMiddleware, compose, createStore } from 'redux';
-
+const sagaMiddleware = createSagaMiddleware();
 const history = createBrowserHistory();
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
-const store = createStore(
-    connectRouter(history)(rootReducer),
-    composeEnhancer(
-        applyMiddleware(
-            routerMiddleware(history)
-        )
-    )
-)
-const render = () => {
-    ReactDOM.render(
-        <AppContainer>
-            <Provider store={store}>
-                <App history={history}/>
-            </Provider>
-        </AppContainer>,
-        document.getElementById('app')
-    )
-}
-
-render();
-
-if(module.hot) {
-    module.hot.accept('./app', () => {
-        render();
-    })
-}
-module.hot.accept('./reducers', () => {
-    store.replaceReducer(connectRouter(history)(rootReducer))
+const reducer = combineReducers({
+  form: formReducer,
+  good: goodModel.goodReducer,
 })
+const store = createStore(
+    connectRouter(history)(reducer),
+    applyMiddleware(
+      routerMiddleware(history),
+      sagaMiddleware)
+)
+sagaMiddleware.run(goodModel.goods);
+
+
+render(
+    <Provider store={store}>
+      <App history={history}/>
+    </Provider>,
+    document.getElementById('app')
+  )
