@@ -23,6 +23,11 @@ module.exports = {
         test: /\.js?/,
         // Don't use .babelrc in `yarn link`-ed dependency's directory and use in current direction instead
         loader: 'babel-loader'
+      },
+      
+      {
+        test: /\.(less|css)?/,
+        loader: 'style-loader!css-loader!less-loader'
       }
     ],
   },

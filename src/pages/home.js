@@ -1,4 +1,5 @@
 import React from 'react';
+import AppBar from './../components/AppBar/AppBar';
 
 export default class Home extends React.Component {
 
@@ -8,7 +9,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <div> 
-                home 
+                <AppBar /> 
                 <button onClick={() => this.goDetail()} >进入详情</button>
             </div>
         )
