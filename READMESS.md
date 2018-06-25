@@ -14,6 +14,9 @@ npm install postcss-cli autoprefixer --save-devnpm install postcss-cli autoprefi
 
 
 
+## redux
+### 初始化过程.
+
 
 ## TODO.
 remove to log.

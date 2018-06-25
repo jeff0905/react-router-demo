@@ -10,6 +10,10 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { render } from 'react-dom';
 import {createBrowserHistory} from 'history';
 import App from './app';
+
+import 'antd-mobile/dist/antd-mobile.css';  // or 'antd-mobile/dist/antd-mobile.less'
+
+
 const sagaMiddleware = createSagaMiddleware();
 const history = createBrowserHistory();
 const reducer = combineReducers({

@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^1.2.3",
+    "antd-mobile": "^2.2.0",
     "connected-react-router": "^4.3.0",
     "history": "^4.7.2",
     "react": "^16.4.0",
