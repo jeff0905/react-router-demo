@@ -8,7 +8,6 @@ react connected-react-router redux react-redux redux-saga
 1. support material icons. 
 2. support less, browserlist, autoprefixer.
 
-
 ## browserslist
 1. autoprefixer. 
 npm install postcss-cli autoprefixer --save-devnpm install postcss-cli autoprefixer --save-dev
