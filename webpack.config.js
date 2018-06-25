@@ -20,14 +20,23 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        use: 'raw-loader'
+      },
+      {
         test: /\.js?/,
         // Don't use .babelrc in `yarn link`-ed dependency's directory and use in current direction instead
         loader: 'babel-loader'
       },
-      
       {
-        test: /\.(less|css)?/,
-        loader: 'style-loader!css-loader!less-loader'
+        test: /\.less$/,
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader'
+        },{
+          loader: 'less-loader'
+        }]
       }
     ],
   },
