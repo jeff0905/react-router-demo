@@ -38,13 +38,17 @@ const effects = {
 function *fetchGoods(action) {
     try {
         console.log(' generator *fetchGoods');
+        yield put({type: 'SHOW_LOADING'});
         const goods = yield call(effects.getGoods);
         console.log('goods', goods );
         if (!goods) {
+            yield put({type: 'HIDE_LOADING'});
             return;
         }
+        yield put({type: 'HIDE_LOADING'});
         yield put({type: 'FETCH_GOODS_OK', goods });
     } catch (e) {
+        yield put({type: 'HIDE_LOADING'});
         yield put({type: 'FETCH_GOODS_FAIL', message: e.message});
     }
 }
@@ -63,6 +67,7 @@ function *addGoods(action) {
         yield put({type: 'ADD_GOODS_FAIL', message: e.message});
     }
 }
+
 function *goods() {
     console.log('saga *goods');
     yield takeEvery('FETCH_GOODS', fetchGoods);
@@ -71,6 +76,16 @@ function *goods() {
 
 const goodReducer = function (state = initState, action) {
     switch (action.type) {
+        case 'SHOW_LOADING':
+            return {
+                ...state,
+                loading: true,
+            }
+        case 'HIDE_LOADING':
+            return {
+                ...state,
+                loading: false,
+            }
         case 'FETCH_GOODS':
             console.log('我开始获取商品了..........');
             return {
